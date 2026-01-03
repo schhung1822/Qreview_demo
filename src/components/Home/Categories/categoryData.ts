@@ -1,6 +1,6 @@
 const data = [
   {
-    title: "Televisions",
+    title: "TV",
     id: 1,
     img: "/images/categories/categories-01.png",
   },
@@ -10,7 +10,7 @@ const data = [
     img: "/images/categories/categories-02.png",
   },
   {
-    title: "Mobile & Tablets",
+    title: "Điện thoại & Máy tính bảng",
     id: 3,
     img: "/images/categories/categories-03.png",
   },
@@ -20,24 +20,34 @@ const data = [
     img: "/images/categories/categories-04.png",
   },
   {
-    title: "Home Appliances",
+    title: "Đồ gia dụng",
     id: 5,
     img: "/images/categories/categories-05.png",
   },
   {
-    title: "Health & Sports",
+    title: "Thể thao",
     id: 6,
     img: "/images/categories/categories-06.png",
   },
   {
-    title: "Watches",
+    title: "Đồng hồ thông minh",
     id: 7,
     img: "/images/categories/categories-07.png",
   },
   {
-    title: "Televisions",
+    title: "Playstation",
     id: 8,
     img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Đồ Decor",
+    id: 9,
+    img: "/images/categories/categories_decor.webp",
+  },
+  {
+    title: "Phụ kiện công nghệ",
+    id: 10,
+    img: "/images/categories/categories_phukien.webp",
   },
 ];
 

@@ -95,9 +95,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
-      {/* <!-- Hero features --> */}
-      <HeroFeature />
     </section>
   );
 };

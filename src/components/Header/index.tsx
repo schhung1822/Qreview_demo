@@ -37,14 +37,14 @@ const Header = () => {
   });
 
   const options = [
-    { label: "All Categories", value: "0" },
-    { label: "Desktop", value: "1" },
+    { label: "Danh mục", value: "0" },
+    { label: "Máy tính bàn", value: "1" },
     { label: "Laptop", value: "2" },
-    { label: "Monitor", value: "3" },
-    { label: "Phone", value: "4" },
-    { label: "Watch", value: "5" },
-    { label: "Mouse", value: "6" },
-    { label: "Tablet", value: "7" },
+    { label: "Màn hình", value: "3" },
+    { label: "Điện thoại", value: "4" },
+    { label: "Đồng hồ", value: "5" },
+    { label: "Chuột", value: "6" },
+    { label: "Máy tính bảng", value: "7" },
   ];
 
   return (
@@ -64,10 +64,10 @@ const Header = () => {
           <div className="xl:w-auto flex-col sm:flex-row w-full flex sm:justify-between sm:items-center gap-5 sm:gap-10">
             <Link className="flex-shrink-0" href="/">
               <Image
-                src="/images/logo/logo.svg"
+                src="/images/logo/Qreview_duongban.webp"
                 alt="Logo"
-                width={219}
-                height={36}
+                width={160}
+                height={30}
               />
             </Link>
 
@@ -85,7 +85,7 @@ const Header = () => {
                       type="search"
                       name="search"
                       id="search"
-                      placeholder="I am shopping for..."
+                      placeholder="Nhập tên sản phẩm hoặc danh mục"
                       autoComplete="off"
                       className="custom-search w-full rounded-r-[5px] bg-gray-1 !border-l-0 border border-gray-3 py-2.5 pl-4 pr-10 outline-none ease-in duration-200"
                     />
@@ -142,15 +142,6 @@ const Header = () => {
                   fill="#3C50E0"
                 />
               </svg>
-
-              <div>
-                <span className="block text-2xs text-dark-4 uppercase">
-                  24/7 SUPPORT
-                </span>
-                <p className="font-medium text-custom-sm text-dark">
-                  (+965) 7492-3477
-                </p>
-              </div>
             </div>
 
             {/* <!-- divider --> */}
@@ -179,15 +170,6 @@ const Header = () => {
                       fill="#3C50E0"
                     />
                   </svg>
-
-                  <div>
-                    <span className="block text-2xs text-dark-4 uppercase">
-                      account
-                    </span>
-                    <p className="font-medium text-custom-sm text-dark">
-                      Sign In
-                    </p>
-                  </div>
                 </Link>
 
                 <button
@@ -230,15 +212,6 @@ const Header = () => {
                       {product.length}
                     </span>
                   </span>
-
-                  <div>
-                    <span className="block text-2xs text-dark-4 uppercase">
-                      cart
-                    </span>
-                    <p className="font-medium text-custom-sm text-dark">
-                      ${totalPrice}
-                    </p>
-                  </div>
                 </button>
               </div>
 
@@ -356,7 +329,7 @@ const Header = () => {
                         fill=""
                       />
                     </svg>
-                    Recently Viewed
+                    Đã xem gần đây
                   </a>
                 </li>
 
@@ -378,7 +351,7 @@ const Header = () => {
                         fill=""
                       />
                     </svg>
-                    Wishlist
+                    Yêu thích
                   </Link>
                 </li>
               </ul>

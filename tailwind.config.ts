@@ -11,7 +11,11 @@ const config: Config = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      "euclid-circular-a": ["Euclid Circular A"],
+      "euclid-circular-a": ["Euclid Circular A", ...defaultTheme.fontFamily.sans],
+
+      manrope: ["var(--font-manrope)", ...defaultTheme.fontFamily.sans],
+
+      sans: ["var(--font-manrope)", ...defaultTheme.fontFamily.sans],
     },
     container: {
       center: true,

@@ -3,25 +3,25 @@ import { Menu } from "@/types/Menu";
 export const menuData: Menu[] = [
   {
     id: 1,
-    title: "Popular",
+    title: "Phổ biến",
     newTab: false,
     path: "/",
   },
   {
     id: 2,
-    title: "Shop",
+    title: "Cửa hàng",
     newTab: false,
     path: "/shop-with-sidebar",
   },
   {
     id: 3,
-    title: "Contact",
+    title: "Liên hệ",
     newTab: false,
     path: "/contact",
   },
   {
     id: 6,
-    title: "pages",
+    title: "Trang",
     newTab: false,
     path: "/",
     submenu: [
@@ -95,7 +95,7 @@ export const menuData: Menu[] = [
   },
   {
     id: 7,
-    title: "blogs",
+    title: "Tin tức",
     newTab: false,
     path: "/",
     submenu: [

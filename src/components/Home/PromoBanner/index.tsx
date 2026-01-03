@@ -13,19 +13,18 @@ const PromoBanner = () => {
             </span>
 
             <h2 className="font-bold text-xl lg:text-heading-4 xl:text-heading-3 text-dark mb-5">
-              UP TO 30% OFF
+              GIẢM GIÁ ĐẾN 30%
             </h2>
 
             <p>
-              iPhone 14 has the same superspeedy chip that’s in iPhone 13 Pro,
-              A15 Bionic, with a 5‑core GPU, powers all the latest features.
+              iPhone 14 sở hữu chip siêu tốc tương tự như iPhone 13 Pro, chip A15 Bionic, với GPU 5 nhân, cung cấp sức mạnh cho tất cả các tính năng mới nhất.
             </p>
 
             <a
               href="#"
               className="inline-flex font-medium text-custom-sm text-white bg-blue py-[11px] px-9.5 rounded-md ease-out duration-200 hover:bg-blue-dark mt-7.5"
             >
-              Buy Now
+              Xem ngay
             </a>
           </div>
 
@@ -51,22 +50,22 @@ const PromoBanner = () => {
 
             <div className="text-right">
               <span className="block text-lg text-dark mb-1.5">
-                Foldable Motorised Treadmill
+                Máy chạy bộ có động cơ gấp gọn
               </span>
 
               <h2 className="font-bold text-xl lg:text-heading-4 text-dark mb-2.5">
-                Workout At Home
+                Tập luyện tại nhà
               </h2>
 
               <p className="font-semibold text-custom-1 text-teal">
-                Flat 20% off
+                Giảm giá đồng loạt 20%
               </p>
 
               <a
                 href="#"
                 className="inline-flex font-medium text-custom-sm text-white bg-teal py-2.5 px-8.5 rounded-md ease-out duration-200 hover:bg-teal-dark mt-9"
               >
-                Grab Now
+                Xem ngay
               </a>
             </div>
           </div>
@@ -87,19 +86,18 @@ const PromoBanner = () => {
               </span>
 
               <h2 className="font-bold text-xl lg:text-heading-4 text-dark mb-2.5">
-                Up to <span className="text-orange">40%</span> off
+                Giảm tới <span className="text-orange">40%</span>
               </h2>
 
               <p className="max-w-[285px] text-custom-sm">
-                The aerospace-grade titanium case strikes the perfect balance of
-                everything.
+                Vỏ bằng titan chất lượng hàng không vũ trụ đạt được sự cân bằng hoàn hảo về mọi mặt.
               </p>
 
               <a
                 href="#"
                 className="inline-flex font-medium text-custom-sm text-white bg-orange py-2.5 px-8.5 rounded-md ease-out duration-200 hover:bg-orange-dark mt-7.5"
               >
-                Buy Now
+                Xem ngay
               </a>
             </div>
           </div>
