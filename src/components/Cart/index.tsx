@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import Discount from "./Discount";
-import OrderSummary from "./OrderSummary";
 import { useAppSelector } from "@/redux/store";
 import SingleItem from "./SingleItem";
 import Breadcrumb from "../Common/Breadcrumb";
@@ -14,15 +12,15 @@ const Cart = () => {
     <>
       {/* <!-- ===== Breadcrumb Section Start ===== --> */}
       <section>
-        <Breadcrumb title={"Cart"} pages={["Cart"]} />
+        <Breadcrumb title={"Yêu thích"} pages={["Yêu thích"]} />
       </section>
       {/* <!-- ===== Breadcrumb Section End ===== --> */}
       {cartItems.length > 0 ? (
         <section className="overflow-hidden py-20 bg-background dark:bg-dark">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex flex-wrap items-center justify-between gap-5 mb-7.5">
-              <h2 className="font-medium text-dark text-2xl">Your Cart</h2>
-              <button className="text-blue">Clear Shopping Cart</button>
+              <h2 className="font-medium text-dark text-2xl">Danh sách yêu thích</h2>
+              <button className="text-blue">Xóa tất cả</button>
             </div>
 
             <div className="bg-background dark:bg-surface rounded-[10px] shadow-1">
@@ -60,10 +58,7 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-7.5 xl:gap-11 mt-9">
-              <Discount />
-              <OrderSummary />
-            </div>
+
           </div>
         </section>
       ) : (
@@ -100,13 +95,13 @@ const Cart = () => {
               </svg>
             </div>
 
-            <p className="pb-6">Your cart is empty!</p>
+            <p className="pb-6">Danh sách yêu thích trống!</p>
 
             <Link
               href="/shop-with-sidebar"
               className="w-96 mx-auto flex justify-center font-medium text-white bg-dark py-[13px] px-6 rounded-md ease-out duration-200 hover:bg-opacity-95"
             >
-              Continue Shopping
+              Tiếp tục mua sắm
             </Link>
           </div>
         </>

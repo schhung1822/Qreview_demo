@@ -1,9 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import TrackingBootstrap from "@/components/Tracking/tracking";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Theo dõi thay đổi theme
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setIsDarkMode(isDark);
+    };
+
+    // Kiểm tra theme ban đầu
+    checkTheme();
+
+    // Theo dõi thay đổi theme
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <footer className="overflow-hidden">
@@ -13,7 +37,7 @@ const Footer = () => {
           <div className="max-w-[330px] w-full">
             <Link className="flex-shrink-0 mb-8" href="/">
               <Image
-                src="/images/logo/Qreview_duongban.webp"
+                src={isDarkMode ? "/images/logo/Qreview_amban.webp" : "/images/logo/Qreview_duongban.webp"}
                 alt="Logo"
                 width={160}
                 height={30}
@@ -62,17 +86,17 @@ const Footer = () => {
 
             <ul className="flex flex-col gap-3">
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="/chinh-sach-bao-mat">
+                <a className="ease-out duration-200 hover:text-blue" href="/privacy-policy">
                   Chính sách bảo mật
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="/dieu-khoan">
+                <a className="ease-out duration-200 hover:text-blue" href="/clause">
                   Điều khoản
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="/FAQs">
+                <a className="ease-out duration-200 hover:text-blue" href="/faqs">
                   FAQ’s
                 </a>
               </li>
@@ -206,3 +230,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

@@ -30,7 +30,7 @@ const Testimonials = () => {
             {/* <!-- section title --> */}
             <div className="mb-10 flex items-center justify-between">
               <div>
-                <span className="flex items-center gap-2.5 font-medium text-dark mb-1.5">
+                <span className="flex items-center gap-2.5 font-medium text-foreground mb-1.5">
                   <Image
                     src="/images/icons/icon-08.svg"
                     alt="icon"
@@ -39,7 +39,7 @@ const Testimonials = () => {
                   />
                   Feedback
                 </span>
-                <h2 className="font-semibold text-xl xl:text-heading-5 text-dark">
+                <h2 className="font-semibold text-xl xl:text-heading-5 text-foreground">
                   Đánh giá từ người dùng
                 </h2>
               </div>
@@ -87,6 +87,7 @@ const Testimonials = () => {
               ref={sliderRef}
               slidesPerView={3}
               spaceBetween={20}
+              autoHeight={false}
               breakpoints={{
                 // when window width is >= 640px
                 0: {
@@ -103,7 +104,7 @@ const Testimonials = () => {
               }}
             >
               {testimonialsData.map((item, key) => (
-                <SwiperSlide key={key}>
+                <SwiperSlide key={key} className="h-auto">
                   <SingleItem testimonial={item} />
                 </SwiperSlide>
               ))}

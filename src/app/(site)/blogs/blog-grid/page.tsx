@@ -3,8 +3,8 @@ import BlogGrid from "@/components/BlogGrid";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Blog Grid Page | NextCommerce Nextjs E-commerce template",
-  description: "This is Blog Grid Page for NextCommerce Template",
+  title: "Tin tức công nghệ - Qreview",
+  description: "Trang tổng hợp tin tức công nghệ mới nhất từ Qreview",
   // other metadata
 };
 

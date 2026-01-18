@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
         <div className="flex flex-wrap gap-5">
           <div className="xl:max-w-[757px] w-full">
-            <div className="relative z-1 rounded-[10px] bg-background dark:bg-surface overflow-hidden">
+            <div className="relative z-1 rounded-[10px] bg-surface dark:bg-surface overflow-hidden">
               {/* <!-- bg shapes --> */}
               <Image
                 src="/images/hero/hero-bg.png"
@@ -25,22 +25,22 @@ const Hero = () => {
 
           <div className="xl:max-w-[393px] w-full">
             <div className="flex flex-col sm:flex-row xl:flex-col gap-5">
-              <div className="w-full relative rounded-[10px] bg-background dark:bg-surface p-4 sm:p-7.5">
+              <div className="w-full relative rounded-[10px] bg-surface dark:bg-surface p-4 sm:p-7.5">
                 <div className="flex items-center gap-14">
                   <div>
-                    <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
+                    <h2 className="max-w-[153px] font-semibold text-foreground text-xl mb-20">
                       <a href="#"> iPhone 14 Plus & 14 Pro Max </a>
                     </h2>
 
                     <div>
-                      <p className="font-medium text-dark-4 text-custom-sm mb-1.5">
+                      <p className="font-medium text-foreground-4 text-custom-sm mb-1.5">
                         Ưu đãu có hạn
                       </p>
                       <span className="flex items-center gap-3">
                         <span className="font-medium text-heading-5 text-red">
                           $699
                         </span>
-                        <span className="font-medium text-2xl text-dark-4 line-through">
+                        <span className="font-medium text-2xl text-foreground line-through">
                           $999
                         </span>
                       </span>
@@ -57,22 +57,22 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full relative rounded-[10px] bg-background dark:bg-surface p-4 sm:p-7.5">
+              <div className="w-full relative rounded-[10px] bg-surface dark:bg-surface p-4 sm:p-7.5">
                 <div className="flex items-center gap-14">
                   <div>
-                    <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
+                    <h2 className="max-w-[153px] font-semibold text-foreground text-xl mb-20">
                       <a href="#"> Tai nghe không dây </a>
                     </h2>
 
                     <div>
-                      <p className="font-medium text-dark-4 text-custom-sm mb-1.5">
+                      <p className="font-medium text-foreground text-custom-sm mb-1.5">
                         Ưu đãu có hạn
                       </p>
                       <span className="flex items-center gap-3">
                         <span className="font-medium text-heading-5 text-red">
                           $699
                         </span>
-                        <span className="font-medium text-2xl text-dark-4 line-through">
+                        <span className="font-medium text-2xl text-foreground line-through">
                           $999
                         </span>
                       </span>

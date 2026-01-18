@@ -1,15 +1,73 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 
 const Contact = () => {
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    const contactData = {
+      firstName: formData.get("firstName"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    };
+
+    // Validate required fields
+    if (!contactData.firstName || !contactData.email) {
+      alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+      return;
+    }
+
+    const tracking = (window as any).__TRACKING__ || {};
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...contactData,
+          fbp: tracking.fbp ?? null,
+          fbc: tracking.fbc ?? null,
+          user_agent: tracking.user_agent ?? navigator.userAgent,
+          page_url: window.location.href,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (response.ok) {
+        // Hiển thị popup thành công
+        setShowSuccessPopup(true);
+        
+        // Reset form
+        form.reset();
+
+        // Tự động ẩn popup sau 3 giây
+        setTimeout(() => {
+          setShowSuccessPopup(false);
+        }, 30000);
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+    }
+  };
+
   return (
     <>
-      <Breadcrumb title={"Contact"} pages={["contact"]} />
+      <Breadcrumb title={"Liên hệ"} pages={["liên hệ"]} />
 
-      <section className="overflow-hidden py-20 bg-background dark:bg-dark">
+      <section className="overflow-hidden py-6 bg-background">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col xl:flex-row gap-7.5">
-            <div className="xl:max-w-[370px] w-full bg-background dark:bg-surface rounded-xl shadow-1">
+            <div className="xl:max-w-[370px] w-full bg-background dark:bg-surface bg-surface rounded-xl shadow-1">
               <div className="py-5 px-4 sm:px-7.5 border-b border-gray-3">
                 <p className="font-medium text-xl text-dark dark:text-foreground">
                   Thông tin liên hệ
@@ -86,8 +144,8 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="xl:max-w-[770px] w-full bg-background dark:bg-surface rounded-xl shadow-1 p-4 sm:p-7.5 xl:p-10">
-              <form>
+            <div className="xl:max-w-[770px] w-full bg-background dark:bg-surface bg-surface  rounded-xl shadow-1 p-4 sm:p-7.5 xl:p-10">
+              <form onSubmit={handleSubmit}>
                 <div className="flex flex-col lg:flex-row gap-5 sm:gap-8 mb-5">
                   <div className="w-full">
                     <label htmlFor="firstName" className="block mb-2.5">
@@ -100,6 +158,7 @@ const Contact = () => {
                       id="firstName"
                       placeholder="Nhập họ và tên của bạn"
                       className="rounded-md border border-gray-3 dark:border-dark-3 bg-background dark:bg-surface placeholder:text-dark-5 dark:placeholder:text-text-muted text-dark dark:text-foreground w-full py-2.5 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
+                      required
                     />
                   </div>
 
@@ -113,6 +172,7 @@ const Contact = () => {
                       name="email"
                       id="email"
                       placeholder="Nhập email của bạn"
+                      required
                       className="rounded-md border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-2.5 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
                     />
                   </div>
@@ -150,7 +210,7 @@ const Contact = () => {
 
                 <div className="mb-7.5">
                   <label htmlFor="message" className="block mb-2.5">
-                  Message
+                  Lời nhắn
                   </label>
 
                   <textarea
@@ -171,6 +231,50 @@ const Contact = () => {
               </form>
             </div>
           </div>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div 
+          className="fixed inset-0 z-99999 flex items-center justify-center bg-dark/50"
+          onClick={() => setShowSuccessPopup(false)}
+        >
+          <div 
+            className="bg-background dark:bg-surface rounded-lg shadow-2 p-8 max-w-md mx-4 animate-fade-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-green/10 rounded-full flex items-center justify-center mb-4">
+                <svg
+                  className="w-8 h-8 text-green"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">
+                Gửi tin nhắn thành công!
+              </h3>
+              <p className="text-text-secondary">
+                Cảm ơn bạn đã liên hệ với chúng tôi. Chúng tôi sẽ phản hồi trong thời gian sớm nhất.
+              </p>
+              <button
+                onClick={() => setShowSuccessPopup(false)}
+                className="mt-6 px-6 py-2 bg-blue text-white rounded-md hover:bg-blue-dark transition-colors"
+              >
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
         </div>
       </section>
     </>

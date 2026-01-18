@@ -11,7 +11,7 @@ import QuickViewModal from "@/components/Common/QuickViewModal";
 import CartSidebarModal from "@/components/Common/CartSidebarModal";
 import { PreviewSliderProvider } from "../context/PreviewSliderContext";
 import PreviewSliderModal from "@/components/Common/PreviewSlider";
-
+import TrackingBootstrap from "@/components/Tracking/tracking";
 import ScrollToTop from "@/components/Common/ScrollToTop";
 import PreLoader from "@/components/Common/PreLoader";
 
@@ -38,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={manrope.variable}>
       <body className={`font-sans bg-background text-foreground ${manrope.variable}`}>
+        <TrackingBootstrap />
         {loading ? (
           <PreLoader />
         ) : (

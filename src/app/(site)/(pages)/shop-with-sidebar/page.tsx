@@ -3,8 +3,8 @@ import ShopWithSidebar from "@/components/ShopWithSidebar";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Shop Page | NextCommerce Nextjs E-commerce template",
-  description: "This is Shop Page for NextCommerce Template",
+  title: "Danh sách sản phẩm - Qreview",
+  description: "Danh sách các sản phẩm đã được Qreview chọn lọc và đánh giá",
   // other metadata
 };
 

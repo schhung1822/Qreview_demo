@@ -38,9 +38,9 @@ const BlogGridWithSidebar = () => {
 
   return (
     <>
-      <Breadcrumb title={"Blog Grid Sidebar"} pages={["blog grid sidebar"]} />
+      <Breadcrumb title={"Tin tức"} pages={["tin tức"]} />
 
-      <section className="overflow-hidden py-20 bg-gray-2">
+      <section className="overflow-hidden py-16 border-t border-gray-3 dark:border-dark-3">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col lg:flex-row gap-7.5">
             {/* <!-- blog grid --> */}
@@ -187,7 +187,7 @@ const BlogGridWithSidebar = () => {
               {/* <!-- Tags box --> */}
               <div className="shadow-1 bg-background dark:bg-surface rounded-xl mt-7.5">
                 <div className="px-4 sm:px-6 py-4.5 border-b border-gray-3">
-                  <h2 className="font-medium text-lg text-dark">Tags</h2>
+                  <h2 className="font-medium text-lg text-foreground">Thẻ</h2>
                 </div>
 
                 <div className="p-4 sm:p-6">

@@ -1,7 +1,53 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 
 const Newsletter = () => {
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const email = formData.get("email");
+
+    if (!email) return;
+
+    const tracking = (window as any).__TRACKING__ || {};
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          fbp: tracking.fbp ?? null,
+          fbc: tracking.fbc ?? null,
+          user_agent: tracking.user_agent ?? navigator.userAgent,
+          page_url: window.location.href,
+        }),
+      });
+
+      if (response.ok) {
+        // Hiển thị popup thành công
+        setShowSuccessPopup(true);
+        
+        // Reset form
+        form.reset();
+
+        // Tự động ẩn popup sau 3 giây
+        setTimeout(() => {
+          setShowSuccessPopup(false);
+        }, 30000);
+      }
+    } catch (error) {
+      console.error("Error submitting newsletter:", error);
+    }
+  };
+
   return (
     <section className="overflow-hidden">
       <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
@@ -27,7 +73,7 @@ const Newsletter = () => {
             </div>
 
             <div className="max-w-[477px] w-full">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <input
                     type="email"
@@ -35,6 +81,7 @@ const Newsletter = () => {
                     id="email"
                     placeholder="Nhập email của bạn"
                     className="w-full bg-surface border border-gray-3 dark:border-dark-3 outline-none rounded-md placeholder:text-muted text-foreground py-3 px-5"
+                    required
                   />
                   <button
                     type="submit"
@@ -48,6 +95,50 @@ const Newsletter = () => {
           </div>
         </div>
       </div>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div 
+          className="fixed inset-0 z-99999 flex items-center justify-center bg-dark/50"
+          onClick={() => setShowSuccessPopup(false)}
+        >
+          <div 
+            className="bg-background dark:bg-surface rounded-lg shadow-2 p-8 max-w-md mx-4 animate-fade-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-green/10 rounded-full flex items-center justify-center mb-4">
+                <svg
+                  className="w-8 h-8 text-green"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">
+                Đăng ký thành công!
+              </h3>
+              <p className="text-text-secondary">
+                Cảm ơn bạn đã đăng ký. Chúng tôi sẽ gửi thông tin sản phẩm mới nhất đến email của bạn.
+              </p>
+              <button
+                onClick={() => setShowSuccessPopup(false)}
+                className="mt-6 px-6 py-2 bg-blue text-white rounded-md hover:bg-blue-dark transition-colors"
+              >
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

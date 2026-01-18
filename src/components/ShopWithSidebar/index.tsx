@@ -184,7 +184,7 @@ const ShopWithSidebar = () => {
                     <CustomSelect options={options} />
 
                     <p>
-                      Hiện <span className="text-dark">9 của 50</span>{" "}
+                      Hiện <span className="text-foreground">9 của 50</span>{" "}
                       Sản phẩm
                     </p>
                   </div>

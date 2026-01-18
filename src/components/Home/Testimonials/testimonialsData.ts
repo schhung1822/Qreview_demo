@@ -2,13 +2,13 @@ import { Testimonial } from "@/types/testimonial";
 
 const testimonialsData: Testimonial[] = [
   {
-    review: `Mình thường có thói quen lên QReview xem đánh giá trước khi mua, vì đọc review ở đây khá chi tiết và dễ hiểu. Chỉ cần xem vài đánh giá là mình biết sản phẩm có phù hợp với nhu cầu hay không.`,
+    review: `Mình thường có thói quen lên QReview xem đánh giá trước khi mua. Chỉ cần xem vài đánh giá là mình biết sản phẩm có phù hợp với nhu cầu hay không.`,
     authorName: "Nguyễn Minh Tuấn",
     authorImg: "/images/users/user-01.jpg",
     authorRole: "Chủ shop kinh doanh online",
   },
   {
-    review: `Trước đây mình hay mua theo quảng cáo nên nhiều lần không đúng kỳ vọng. Từ khi biết QReview, mình có thêm góc nhìn thực tế hơn nên mua hàng cũng yên tâm hơn.`,
+    review: `Trước đây m hay mua theo cảm tính nên nhiều lần không đúng kỳ vọng. Từ khi biết QReview, mình có thêm góc nhìn thực tế hơn nên mua hàng cũng yên tâm hơn.`,
     authorName: "Trần Thị Thu Hà",
     authorImg: "/images/users/user-02.jpg",
     authorRole: "Nhân viên văn phòng",
