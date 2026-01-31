@@ -61,9 +61,12 @@ const ShopDetails = () => {
   // add to cart
   const handleAddToCart = () => {
     if (!product) return;
+    const itemId = Number(product.id);
+    if (Number.isNaN(itemId)) return;
     dispatch(
       addItemToCart({
         ...product,
+        id: itemId,
         quantity,
       })
     );

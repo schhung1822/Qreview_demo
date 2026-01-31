@@ -10,7 +10,7 @@ type CategoryRow = RowDataPacket & {
   image_url?: string | null;
 };
 
-type ProductRow = {
+type ProductRow = RowDataPacket & {
   id: string;
   name: string;
   slug?: string | null;
@@ -18,14 +18,14 @@ type ProductRow = {
   price_max: number | null;
 };
 
-type ImageRow = {
+type ImageRow = RowDataPacket & {
   product_id: string;
   image_url: string;
   is_thumbnail: string | null;
   sort_order: number | null;
 };
 
-type ReviewRow = {
+type ReviewRow = RowDataPacket & {
   product_id: string;
   reviews: number;
 };
