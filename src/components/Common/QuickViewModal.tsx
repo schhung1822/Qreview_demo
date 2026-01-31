@@ -31,9 +31,12 @@ const QuickViewModal = () => {
 
   // add to cart
   const handleAddToCart = () => {
+    const itemId = Number(product.id);
+    if (Number.isNaN(itemId)) return;
     dispatch(
       addItemToCart({
         ...product,
+        id: itemId,
         quantity,
       })
     );

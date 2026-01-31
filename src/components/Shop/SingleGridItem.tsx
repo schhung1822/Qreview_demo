@@ -28,18 +28,24 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
   // add to cart
   const handleAddToCart = () => {
+    const itemId = Number(item.id);
+    if (Number.isNaN(itemId)) return;
     dispatch(
       addItemToCart({
         ...item,
+        id: itemId,
         quantity: 1,
       })
     );
   };
 
   const handleItemToWishList = () => {
+    const itemId = Number(item.id);
+    if (Number.isNaN(itemId)) return;
     dispatch(
       addItemToWishlist({
         ...item,
+        id: itemId,
         status: "available",
         quantity: 1,
       })

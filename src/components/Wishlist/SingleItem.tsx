@@ -15,9 +15,12 @@ const SingleItem = ({ item }) => {
   };
 
   const handleAddToCart = () => {
+    const itemId = Number(item.id);
+    if (Number.isNaN(itemId)) return;
     dispatch(
       addItemToCart({
         ...item,
+        id: itemId,
         quantity: 1,
       })
     );
