@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import mysql from "mysql2/promise";
+import mysql, { RowDataPacket } from "mysql2/promise";
 
 export const runtime = "nodejs";
 
-type AffiliateRow = {
+type AffiliateRow = RowDataPacket & {
   id: string;
   products_id?: string;
   product_id?: string;
