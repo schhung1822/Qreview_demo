@@ -1,10 +1,34 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ProductItem from "@/components/Common/ProductItem";
-import shopData from "@/components/Shop/shopData";
+import { Product } from "@/types/product";
 
 const NewArrival = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch("/api/products")
+      .then((response) => response.json())
+      .then((data) => {
+        if (!isMounted) return;
+        setProducts(data?.products ?? []);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <section className="overflow-hidden pt-15">
       <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
@@ -48,9 +72,27 @@ const NewArrival = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-7.5 gap-y-9">
           {/* <!-- New Arrivals item --> */}
-          {shopData.map((item, key) => (
-            <ProductItem item={item} key={key} />
-          ))}
+          {isLoading ? (
+            Array.from({ length: 8 }).map((_, index) => (
+              <div
+                key={`new-arrival-skeleton-${index}`}
+                className="rounded-lg bg-surface dark:bg-surface shadow-1 p-4 animate-pulse"
+              >
+                <div className="h-40 bg-gray-200 dark:bg-gray-700 rounded-md mb-4" />
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4" />
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
+              </div>
+            ))
+          ) : products.length ? (
+            products.slice(0, 8).map((item, key) => (
+              <ProductItem item={item} key={key} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-10 text-foreground">
+              Không có sản phẩm để hiển thị.
+            </div>
+          )}
         </div>
       </div>
     </section>

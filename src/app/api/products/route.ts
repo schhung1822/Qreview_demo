@@ -7,6 +7,11 @@ type ProductRow = RowDataPacket & {
   id: string;
   name: string;
   slug?: string | null;
+  tag_id?: string | null;
+  category_id?: string | null;
+  brand_id?: string | null;
+  short_desc?: string | null;
+  status?: string | null;
   price_min: number | null;
   price_max: number | null;
 };
@@ -56,12 +61,12 @@ export async function GET() {
 
     try {
       const [rows] = await pool.query<ProductRow[]>(
-        "SELECT id, name, slug, price_min, price_max FROM products ORDER BY id DESC LIMIT 50"
+        "SELECT id, name, slug, tag_id, category_id, price_min, price_max FROM products ORDER BY id DESC LIMIT 50"
       );
       products = rows;
     } catch {
       const [rows] = await pool.query<ProductRow[]>(
-        "SELECT id, name, price_min, price_max FROM products ORDER BY id DESC LIMIT 50"
+        "SELECT id, name, tag_id, category_id, price_min, price_max FROM products ORDER BY id DESC LIMIT 50"
       );
       products = rows;
     }
@@ -122,6 +127,8 @@ export async function GET() {
         id: product.id,
         title: product.name,
         slug: product.slug ? normalizeSlug(product.slug) : normalizeSlug(product.name),
+        tagId: product.tag_id ?? null,
+        categoryId: product.category_id ?? null,
         price: priceMin,
         discountedPrice: priceMax,
         reviews: reviewsByProduct[product.id] ?? 0,
@@ -145,6 +152,7 @@ export async function GET() {
 }
 
 type CreateProductPayload = {
+  id?: string;
   name: string;
   slug?: string | null;
   categoryId?: string | null;
@@ -248,6 +256,135 @@ export async function POST(request: Request) {
     console.error("Create product API error:", error);
     const message =
       error instanceof Error ? error.message : "Failed to create product.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const token = getAuthToken(request);
+    if (!adminToken || token !== adminToken) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (!dbPassword) {
+      throw new Error("Missing DB password. Check DB_PASSWORD in .env.local");
+    }
+
+    const body = (await request.json()) as CreateProductPayload;
+    if (!body?.id) {
+      return NextResponse.json({ error: "Missing product id" }, { status: 400 });
+    }
+
+    if (!body?.name) {
+      return NextResponse.json({ error: "Missing product name" }, { status: 400 });
+    }
+
+    const slug = body.slug ? normalizeSlug(body.slug) : normalizeSlug(body.name);
+    const now = new Date();
+    const priceMin = Number(body.priceMin ?? 0);
+    const priceMax = Number(body.priceMax ?? priceMin ?? 0);
+
+    await pool.query(
+      "UPDATE products SET name = ?, slug = ?, category_id = ?, brand_id = ?, short_desc = ?, content = ?, price_min = ?, price_max = ?, status = ?, tag_id = ?, update_time = ? WHERE id = ?",
+      [
+        body.name,
+        slug,
+        body.categoryId ?? null,
+        body.brandId ?? null,
+        body.shortDesc ?? null,
+        body.content ?? null,
+        priceMin,
+        priceMax,
+        body.status ?? "active",
+        body.tagId ?? null,
+        now,
+        body.id,
+      ]
+    );
+
+    const images = (body.images ?? []).filter(Boolean);
+    if (images.length) {
+      await pool.query("DELETE FROM product_images WHERE product_id = ?", [body.id]);
+      const values = images.map((imageUrl, index) => [
+        body.id,
+        imageUrl,
+        body.thumbnailIndex === index ? "1" : "0",
+        index + 1,
+      ]);
+
+      await pool.query(
+        "INSERT INTO product_images (product_id, image_url, is_thumbnail, sort_order) VALUES ?",
+        [values]
+      );
+    }
+
+    if (body.specs) {
+      try {
+        await pool.query("DELETE FROM product_specs WHERE product_id = ?", [body.id]);
+        if (body.specs.length) {
+          const specValues = body.specs.map((spec) => [body.id, spec.key, spec.value]);
+          await pool.query(
+            "INSERT INTO product_specs (product_id, spec_key, spec_value) VALUES ?",
+            [specValues]
+          );
+        }
+      } catch {
+        // ignore if table doesn't exist
+      }
+    }
+
+    return NextResponse.json({ id: body.id, slug });
+  } catch (error) {
+    console.error("Update product API error:", error);
+    const message =
+      error instanceof Error ? error.message : "Failed to update product.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const token = getAuthToken(request);
+    if (!adminToken || token !== adminToken) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (!dbPassword) {
+      throw new Error("Missing DB password. Check DB_PASSWORD in .env.local");
+    }
+
+    const body = (await request.json()) as { id?: string };
+    if (!body?.id) {
+      return NextResponse.json({ error: "Missing product id" }, { status: 400 });
+    }
+
+    const productId = body.id;
+
+    await pool.query("DELETE FROM product_images WHERE product_id = ?", [productId]);
+    try {
+      await pool.query("DELETE FROM product_specs WHERE product_id = ?", [productId]);
+    } catch {
+      // ignore
+    }
+    try {
+      await pool.query("DELETE FROM affiliate_links WHERE products_id = ?", [productId]);
+    } catch {
+      // ignore
+    }
+    try {
+      await pool.query("DELETE FROM product_variant WHERE product_id = ?", [productId]);
+    } catch {
+      // ignore
+    }
+
+    await pool.query("DELETE FROM products WHERE id = ?", [productId]);
+
+    return NextResponse.json({ id: productId });
+  } catch (error) {
+    console.error("Delete product API error:", error);
+    const message =
+      error instanceof Error ? error.message : "Failed to delete product.";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -9,6 +9,10 @@ type ProductRow = RowDataPacket & {
   slug?: string | null;
   content?: string | null;
   tag_id?: string | null;
+  category_id?: string | null;
+  brand_id?: string | null;
+  short_desc?: string | null;
+  status?: string | null;
   price_min: number | null;
   price_max: number | null;
 };
@@ -91,7 +95,7 @@ export async function GET(
 
     try {
       const [productsBySlug] = await pool.query<ProductRow[]>(
-        "SELECT id, name, slug, content, tag_id, price_min, price_max FROM products WHERE LOWER(TRIM(slug)) = LOWER(?) LIMIT 1",
+        "SELECT id, name, slug, content, short_desc, status, tag_id, category_id, brand_id, price_min, price_max FROM products WHERE LOWER(TRIM(slug)) = LOWER(?) LIMIT 1",
         [normalizedSlug]
       );
 
@@ -99,7 +103,7 @@ export async function GET(
     } catch {
       try {
         const [productsBySlug] = await pool.query<ProductRow[]>(
-          "SELECT id, name, slug, tag_id, price_min, price_max FROM products WHERE LOWER(TRIM(slug)) = LOWER(?) LIMIT 1",
+          "SELECT id, name, slug, short_desc, status, tag_id, category_id, brand_id, price_min, price_max FROM products WHERE LOWER(TRIM(slug)) = LOWER(?) LIMIT 1",
           [normalizedSlug]
         );
 
@@ -112,13 +116,13 @@ export async function GET(
     if (!product) {
       try {
         const [productsById] = await pool.query<ProductRow[]>(
-          "SELECT id, name, slug, content, tag_id, price_min, price_max FROM products WHERE id = ? LIMIT 1",
+          "SELECT id, name, slug, content, short_desc, status, tag_id, category_id, brand_id, price_min, price_max FROM products WHERE id = ? LIMIT 1",
           [resolvedParams.slug]
         );
         product = productsById[0];
       } catch {
         const [productsById] = await pool.query<ProductRow[]>(
-          "SELECT id, name, slug, tag_id, price_min, price_max FROM products WHERE id = ? LIMIT 1",
+          "SELECT id, name, slug, short_desc, status, tag_id, category_id, brand_id, price_min, price_max FROM products WHERE id = ? LIMIT 1",
           [resolvedParams.slug]
         );
         product = productsById[0];
@@ -129,18 +133,18 @@ export async function GET(
       let productsByName: ProductRow[] = [];
       try {
         const [rows] = await pool.query<ProductRow[]>(
-          "SELECT id, name, slug, content, tag_id, price_min, price_max FROM products LIMIT 500"
+          "SELECT id, name, slug, content, short_desc, status, tag_id, category_id, brand_id, price_min, price_max FROM products LIMIT 500"
         );
         productsByName = rows;
       } catch {
         try {
           const [rows] = await pool.query<ProductRow[]>(
-            "SELECT id, name, slug, tag_id, price_min, price_max FROM products LIMIT 500"
+            "SELECT id, name, slug, short_desc, status, tag_id, category_id, brand_id, price_min, price_max FROM products LIMIT 500"
           );
           productsByName = rows;
         } catch {
           const [rows] = await pool.query<ProductRow[]>(
-            "SELECT id, name, price_min, price_max FROM products LIMIT 500"
+            "SELECT id, name, category_id, brand_id, short_desc, status, price_min, price_max FROM products LIMIT 500"
           );
           productsByName = rows;
         }
@@ -204,6 +208,11 @@ export async function GET(
         title: product.name,
         slug: product.slug ? normalizeSlug(product.slug) : normalizeSlug(product.name),
         tagName,
+        categoryId: product.category_id ?? null,
+        brandId: product.brand_id ?? null,
+        tagId: product.tag_id ?? null,
+        shortDesc: product.short_desc ?? null,
+        status: product.status ?? null,
         content: product.content ?? null,
         specs: specs.map((spec) => ({
           key: spec.spec_key,

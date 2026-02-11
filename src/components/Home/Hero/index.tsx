@@ -29,19 +29,16 @@ const Hero = () => {
                 <div className="flex items-center gap-14">
                   <div>
                     <h2 className="max-w-[153px] font-semibold text-foreground text-xl mb-20">
-                      <a href="#"> Xiaomi 17 & Xiaomi 17 Pro </a>
+                      <a href="/shop-details/xiaomi17-xiaomi17pro"> Xiaomi 17 & Xiaomi 17 Pro </a>
                     </h2>
 
                     <div>
-                      <p className="font-medium text-foreground-4 text-custom-sm mb-1.5">
-                        Ưu đãu có hạn
-                      </p>
-                      <span className="flex items-center gap-3">
-                        <span className="font-medium text-heading-5 text-red">
-                          $699
+                      <span className="flex flex-col items-start">
+                        <span className="font-medium text-xl text-heading-5 text-red">
+                          1.990.000đ
                         </span>
-                        <span className="font-medium text-2xl text-foreground line-through">
-                          $999
+                        <span className="font-medium text-xl text-foreground ">
+                          2.299.000đ
                         </span>
                       </span>
                     </div>
@@ -49,7 +46,7 @@ const Hero = () => {
 
                   <div>
                     <Image
-                      src="/images/hero/hero1.png"
+                      src="/images/hero/hero-1.png"
                       alt="mobile image"
                       width={123}
                       height={161}
@@ -61,19 +58,16 @@ const Hero = () => {
                 <div className="flex items-center gap-14">
                   <div>
                     <h2 className="max-w-[153px] font-semibold text-foreground text-xl mb-20">
-                      <a href="#"> Loa Xiaomi SoundParty </a>
+                      <a href="/shop-details/loa-xiaomi-sound-outdoor"> Loa Xiaomi SoundParty </a>
                     </h2>
-
+                    
                     <div>
-                      <p className="font-medium text-foreground text-custom-sm mb-1.5">
-                        Ưu đãu có hạn
-                      </p>
-                      <span className="flex items-center gap-3">
-                        <span className="font-medium text-heading-5 text-red">
-                          $699
+                      <span className="flex flex-col items-start">
+                        <span className="font-medium text-xl text-heading-5 text-red">
+                          22.500.000đ
                         </span>
-                        <span className="font-medium text-2xl text-foreground line-through">
-                          $999
+                        <span className="font-medium text-xl text-foreground">
+                          27.000.000đ
                         </span>
                       </span>
                     </div>
@@ -81,7 +75,7 @@ const Hero = () => {
 
                   <div>
                     <Image
-                      src="/images/hero/hero2.png"
+                      src="/images/hero/hero-2.png"
                       alt="mobile image"
                       width={123}
                       height={161}

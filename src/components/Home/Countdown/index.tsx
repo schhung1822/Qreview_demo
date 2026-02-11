@@ -39,7 +39,7 @@ const CounDown = () => {
               Nâng cao trải nghiệm âm thanh của bạn
             </h2>
 
-            <p>Tai nghe Havit H206d.</p>
+            <p>Loa Bluetooth Xiaomi Sound Party NS7-GL</p>
 
             {/* <!-- Countdown timer --> */}
             <div
@@ -90,7 +90,7 @@ const CounDown = () => {
             {/* <!-- Countdown timer ends --> */}
 
             <a
-              href="#"
+              href="/shop-details/loa-xiaomi-sound-outdoor"
               className="inline-flex font-medium text-custom-sm text-white bg-blue py-3 px-9.5 rounded-md ease-out duration-200 hover:bg-blue-dark mt-7.5"
             >
               XEM NGAY!
@@ -106,7 +106,7 @@ const CounDown = () => {
             height={482}
           />
           <Image
-            src="/images/countdown/countdown-01.png"
+            src="/images/countdown/countdown.png"
             alt="product"
             className="hidden lg:block absolute right-4 xl:right-33 bottom-4 xl:bottom-10 -z-1"
             width={411}

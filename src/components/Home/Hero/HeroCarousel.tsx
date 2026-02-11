@@ -38,11 +38,11 @@ const HeroCarousal = () => {
             </div>
 
             <h1 className="font-semibold text-foreground text-xl sm:text-3xl mb-3">
-              <a href="#">Tai nghe chống ồn không dây thực sự</a>
+              <a href="shop-details/xiaomi17-xiaomi17pro">Xiaomi 17 & Xiaomi 17 Pro</a>
             </h1>
 
             <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at ipsum at risus euismod lobortis in
+              Xiaomi 17 với Snapdragon 8 Elite Gen 5, dung lượng pin 7000 mAh, màn hình LTPO AMOLED 6,3″ và cụm 3 camera 50 MP chất lượng cao cho ảnh/video sắc nét.
             </p>
 
             <a
@@ -55,7 +55,7 @@ const HeroCarousal = () => {
 
           <div>
             <Image
-              src="/images/hero/hero-01.png"
+              src="/images/hero/hero-1.png"
               alt="headphone"
               width={351}
               height={358}
@@ -79,16 +79,15 @@ const HeroCarousal = () => {
             </div>
 
             <h1 className="font-semibold text-foreground text-xl sm:text-3xl mb-3">
-              <a href="#">Tai nghe chống ồn không dây thực sự</a>
+              <a href="#">Loa Xiaomi SoundParty</a>
             </h1>
 
             <p>
-              Lorem ipsum dolor sit, consectetur elit nunc suscipit non ipsum
-              nec suscipit.
+              loa Bluetooth di động 50 W mạnh mẽ, cho âm thanh sống động với Bass Boost, Bluetooth 5.4 và đèn LED 3D hấp dẫn
             </p>
 
             <a
-              href="#"
+              href="/shop-details/loa-xiaomi-sound-outdoor"
               className="inline-flex font-medium text-white text-custom-sm rounded-md bg-dark py-3 px-9 ease-out duration-200 hover:bg-blue mt-10"
             >
               Xem ngay
@@ -97,7 +96,7 @@ const HeroCarousal = () => {
 
           <div>
             <Image
-              src="/images/hero/hero-01.png"
+              src="/images/hero/hero-2.png"
               alt="headphone"
               width={351}
               height={358}

@@ -72,21 +72,6 @@ const ShopDetails = () => {
     );
   };
 
-  const storages = [
-    {
-      id: "gb128",
-      title: "128 GB",
-    },
-    {
-      id: "gb256",
-      title: "256 GB",
-    },
-    {
-      id: "gb512",
-      title: "521 GB",
-    },
-  ];
-
   const tabs = [
     {
       id: "tabOne",
@@ -218,7 +203,10 @@ const ShopDetails = () => {
             </div>
           </div>
         </section>
-        <RecentlyViewdItems />
+        <RecentlyViewdItems
+          categoryId={product?.categoryId}
+          currentProductId={product?.id}
+        />
         <Newsletter />
       </>
     );
@@ -529,83 +517,16 @@ const ShopDetails = () => {
                                   onChange={() => setActiveColor(color)}
                                 />
                                 <div
-                                  className={`flex items-center justify-center w-5.5 h-5.5 rounded-full ${activeColor === color && "border"
+                                  className={`flex items-center justify-center w-9 h-5.5 rounded-full ${activeColor === color && "border"
                                     }`}
                                   style={{ borderColor: `${color}` }}
                                 >
                                   <span
-                                    className="block w-3 h-3 rounded-full"
+                                    className="block w-6 h-3 rounded-full"
                                     style={{ backgroundColor: `${color}` }}
                                   ></span>
                                 </div>
                               </div>
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* <!-- details item --> */}
-                      <div className="flex items-center gap-4">
-                        <div className="min-w-[65px]">
-                          <h4 className="font-medium text-foreground dark:text-foreground">Storage:</h4>
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                          {storages.map((item, key) => (
-                            <label
-                              key={key}
-                              htmlFor={item.id}
-                              className="flex cursor-pointer select-none items-center"
-                            >
-                              <div className="relative">
-                                <input
-                                  type="checkbox"
-                                  name="storage"
-                                  id={item.id}
-                                  className="sr-only"
-                                  onChange={() => setStorage(item.id)}
-                                />
-
-                                {/*  */}
-                                <div
-                                  className={`mr-2 flex h-4 w-4 items-center justify-center rounded border ${storage === item.id
-                                    ? "border-blue bg-blue"
-                                    : "border-gray-4"
-                                    } `}
-                                >
-                                  <span
-                                    className={
-                                      storage === item.id
-                                        ? "opacity-100"
-                                        : "opacity-0"
-                                    }
-                                  >
-                                    <svg
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <rect
-                                        x="4"
-                                        y="4.00006"
-                                        width="16"
-                                        height="16"
-                                        rx="4"
-                                        fill="#3C50E0"
-                                      />
-                                      <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M16.3103 9.25104C16.471 9.41178 16.5612 9.62978 16.5612 9.85707C16.5612 10.0844 16.471 10.3024 16.3103 10.4631L12.0243 14.7491C11.8635 14.9098 11.6455 15.0001 11.4182 15.0001C11.191 15.0001 10.973 14.9098 10.8122 14.7491L8.24062 12.1775C8.08448 12.0158 7.99808 11.7993 8.00003 11.5745C8.00199 11.3498 8.09214 11.1348 8.25107 10.9759C8.41 10.8169 8.62499 10.7268 8.84975 10.7248C9.0745 10.7229 9.29103 10.8093 9.4527 10.9654L11.4182 12.931L15.0982 9.25104C15.2589 9.09034 15.4769 9.00006 15.7042 9.00006C15.9315 9.00006 16.1495 9.09034 16.3103 9.25104Z"
-                                        fill="white"
-                                      />
-                                    </svg>
-                                  </span>
-                                </div>
-                              </div>
-                              {item.title}
                             </label>
                           ))}
                         </div>
@@ -1339,7 +1260,10 @@ const ShopDetails = () => {
             </div>
           </section>
 
-          <RecentlyViewdItems />
+          <RecentlyViewdItems
+            categoryId={product?.categoryId}
+            currentProductId={product?.id}
+          />
 
           <Newsletter />
         </>

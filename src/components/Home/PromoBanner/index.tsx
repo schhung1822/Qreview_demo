@@ -9,7 +9,7 @@ const PromoBanner = () => {
         <div className="relative z-1 overflow-hidden rounded-lg bg-surface dark:bg-surface py-12.5 lg:py-17.5 xl:py-22.5 px-4 sm:px-7.5 lg:px-14 xl:px-19 mb-7.5">
           <div className="max-w-[550px] w-full">
             <span className="block font-medium text-xl text-foreground mb-3">
-              Apple iPhone 14 Plus
+              Xiaomi 17 Giảm sâu
             </span>
 
             <h2 className="font-bold text-xl lg:text-heading-4 xl:text-heading-3 text-foreground mb-5">
@@ -17,7 +17,7 @@ const PromoBanner = () => {
             </h2>
 
             <p>
-              iPhone 14 sở hữu chip siêu tốc tương tự như iPhone 13 Pro, chip A15 Bionic, với GPU 5 nhân, cung cấp sức mạnh cho tất cả các tính năng mới nhất.
+              Xiaomi 17 nổi bật ở chip Snapdragon 8 Elite Gen 5 mạnh mẽ, dung lượng pin 7000 mAh, màn hình LTPO AMOLED 6,3″ sáng rõ 3 500 nit và cụm 3 camera 50 MP chất lượng cao cho ảnh/video sắc nét.
             </p>
 
             <a
@@ -29,7 +29,7 @@ const PromoBanner = () => {
           </div>
 
           <Image
-            src="/images/promo/promo-01.png"
+            src="/images/promo/xiaomi_17.png"
             alt="promo img"
             className="absolute bottom-0 right-4 lg:right-26 -z-1"
             width={274}
@@ -41,7 +41,7 @@ const PromoBanner = () => {
           {/* <!-- promo banner small --> */}
           <div className="relative z-1 overflow-hidden rounded-lg bg-surface dark:bg-surface py-10 xl:py-16 px-4 sm:px-7.5 xl:px-10">
             <Image
-              src="/images/promo/promo-02.png"
+              src="/images/promo/xe_dap.png"
               alt="promo img"
               className="absolute top-1/2 -translate-y-1/2 left-3 sm:left-10 -z-1"
               width={241}
@@ -50,7 +50,7 @@ const PromoBanner = () => {
 
             <div className="text-right">
               <span className="block text-lg text-foreground mb-1.5">
-                Máy chạy bộ có động cơ gấp gọn
+                Xe đạp tập thể thao
               </span>
 
               <h2 className="font-bold text-xl lg:text-heading-4 text-foreground mb-2.5">
@@ -73,7 +73,7 @@ const PromoBanner = () => {
           {/* <!-- promo banner small --> */}
           <div className="relative z-1 overflow-hidden rounded-lg bg-surface dark:bg-surface py-10 xl:py-16 px-4 sm:px-7.5 xl:px-10">
             <Image
-              src="/images/promo/promo-03.png"
+              src="/images/promo/xiaomi_watch.webp"
               alt="promo img"
               className="absolute top-1/2 -translate-y-1/2 right-3 sm:right-8.5 -z-1"
               width={200}
@@ -82,7 +82,7 @@ const PromoBanner = () => {
 
             <div>
               <span className="block text-lg text-foreground mb-1.5">
-                Apple Watch Ultra
+                Xiaomi Watch Ultra
               </span>
 
               <h2 className="font-bold text-xl lg:text-heading-4 text-foreground mb-2.5">

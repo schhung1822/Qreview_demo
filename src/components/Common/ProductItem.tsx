@@ -15,6 +15,8 @@ const ProductItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
 
   const dispatch = useDispatch<AppDispatch>();
+  const formatPrice = (value: number) =>
+    new Intl.NumberFormat("vi-VN").format(value);
   const productHref = item.slug
     ? `/shop-details/${item.slug}`
     : `/shop-details/${item.id}`;
@@ -169,8 +171,8 @@ const ProductItem = ({ item }: { item: Product }) => {
       </h3>
 
       <span className="flex items-center gap-2 font-medium text-lg">
-        <span className="text-foreground">${item.discountedPrice}</span>
-        <span className="text-dark-4 line-through">${item.price}</span>
+        <span className="text-foreground">{formatPrice(item.price)}đ</span> -
+        <span className="text-foreground">{formatPrice(item.discountedPrice)}đ</span>
       </span>
     </div>
   );

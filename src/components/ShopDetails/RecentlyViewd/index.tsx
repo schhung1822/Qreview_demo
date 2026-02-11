@@ -1,17 +1,25 @@
 "use client";
-import React from "react";
-import shopData from "@/components/Shop/shopData";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ProductItem from "@/components/Common/ProductItem";
 import Image from "next/image";
-import Link from "next/link";
+import { Product } from "@/types/product";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useCallback, useRef } from "react";
 import "swiper/css/navigation";
 import "swiper/css";
 
-const RecentlyViewdItems = () => {
+type RecentlyViewdItemsProps = {
+  categoryId?: number | string | null;
+  currentProductId?: number | string | null;
+};
+
+const RecentlyViewdItems = ({
+  categoryId,
+  currentProductId,
+}: RecentlyViewdItemsProps) => {
   const sliderRef = useRef(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
@@ -22,6 +30,44 @@ const RecentlyViewdItems = () => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slideNext();
   }, []);
+
+  useEffect(() => {
+    if (!categoryId) {
+      setProducts([]);
+      setIsLoading(false);
+      return;
+    }
+
+    let isMounted = true;
+    setIsLoading(true);
+
+    fetch("/api/products")
+      .then((response) => response.json())
+      .then((data) => {
+        if (!isMounted) return;
+        const items: Product[] = data?.products ?? [];
+        const filtered = items.filter(
+          (item) =>
+            Number(item.categoryId) === Number(categoryId) &&
+            String(item.id) !== String(currentProductId ?? "")
+        );
+
+        const shuffled = [...filtered].sort(() => 0.5 - Math.random());
+        setProducts(shuffled.slice(0, 8));
+        setIsLoading(false);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setProducts([]);
+        setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [categoryId, currentProductId]);
+
+  const slides = useMemo(() => products, [products]);
 
   return (
     <section className="overflow-hidden pt-17.5">
@@ -89,11 +135,30 @@ const RecentlyViewdItems = () => {
             spaceBetween={20}
             className="justify-between"
           >
-            {shopData.map((item, key) => (
-              <SwiperSlide key={key}>
-                <ProductItem item={item} />
+            {isLoading ? (
+              Array.from({ length: 4 }).map((_, index) => (
+                <SwiperSlide key={`related-skeleton-${index}`}>
+                  <div className="rounded-lg bg-surface dark:bg-surface shadow-1 p-4 animate-pulse">
+                    <div className="h-40 bg-gray-200 dark:bg-gray-700 rounded-md mb-4" />
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4" />
+                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
+                  </div>
+                </SwiperSlide>
+              ))
+            ) : slides.length ? (
+              slides.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <ProductItem item={item} />
+                </SwiperSlide>
+              ))
+            ) : (
+              <SwiperSlide>
+                <div className="text-center py-10 text-foreground">
+                  Không có sản phẩm liên quan.
+                </div>
               </SwiperSlide>
-            ))}
+            )}
           </Swiper>
         </div>
       </div>

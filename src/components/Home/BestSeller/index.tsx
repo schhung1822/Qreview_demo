@@ -1,10 +1,42 @@
-import React from "react";
+"use client";
+import React, { useEffect, useMemo, useState } from "react";
 import SingleItem from "./SingleItem";
 import Image from "next/image";
 import Link from "next/link";
-import shopData from "@/components/Shop/shopData";
+import { Product } from "@/types/product";
 
 const BestSeller = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch("/api/products")
+      .then((response) => response.json())
+      .then((data) => {
+        if (!isMounted) return;
+        setProducts(data?.products ?? []);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const bestSellerProducts = useMemo(
+    () =>
+      products
+        .filter((item) => Number(item.tagId) === 3)
+        .slice(0, 6),
+    [products]
+  );
+
   return (
     <section className="overflow-hidden">
       <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
@@ -28,9 +60,27 @@ const BestSeller = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7.5">
           {/* <!-- Best Sellers item --> */}
-          {shopData.slice(1, 7).map((item, key) => (
-            <SingleItem item={item} key={key} />
-          ))}
+          {isLoading ? (
+            Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={`best-seller-skeleton-${index}`}
+                className="rounded-lg bg-surface dark:bg-surface shadow-1 p-4 animate-pulse min-h-[403px]"
+              >
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4" />
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mx-auto mb-6" />
+                <div className="h-56 bg-gray-200 dark:bg-gray-700 rounded-md" />
+              </div>
+            ))
+          ) : bestSellerProducts.length ? (
+            bestSellerProducts.map((item, key) => (
+              <SingleItem item={item} key={key} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-10 text-foreground">
+              Không có sản phẩm để hiển thị.
+            </div>
+          )}
         </div>
 
         <div className="text-center mt-12.5">

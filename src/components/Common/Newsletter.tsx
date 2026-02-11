@@ -86,7 +86,7 @@ const Newsletter = () => {
                     name="email"
                     id="email"
                     placeholder="Nhập email của bạn"
-                    className="w-full bg-surface border border-gray-3 dark:border-dark-3 outline-none rounded-md placeholder:text-muted text-foreground py-3 px-5"
+                    className="w-full bg-surface border border-gray-3 dark:border-dark-3 outline-none rounded-md placeholder:text-foreground-3 text-foreground py-3 px-5"
                     required
                   />
                   <button
